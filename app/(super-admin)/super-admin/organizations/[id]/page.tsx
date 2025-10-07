@@ -122,7 +122,7 @@ export default function OrganizationDetailPage() {
   };
 
   const handleDeleteUser = (userId: string) => {
-    if (confirm('Вы уверены, что хотите удалить этого пользователя?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
       deleteUserMutation.mutate({ id: userId });
     }
   };
@@ -134,12 +134,12 @@ export default function OrganizationDetailPage() {
   if (!organization) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Организация не найдена</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">Organization not found</p>
         <button
           onClick={() => router.back()}
           className="text-indigo-600 dark:text-indigo-400 hover:underline"
         >
-          ← Назад к списку
+          ← Back to list
         </button>
       </div>
     );
@@ -151,7 +151,7 @@ export default function OrganizationDetailPage() {
         onClick={() => router.back()}
         className="text-indigo-600 dark:text-indigo-400 hover:underline mb-6"
       >
-        ← Назад к списку организаций
+        ← Back to the list of organizations
       </button>
 
       <OrganizationInfo
@@ -164,7 +164,7 @@ export default function OrganizationDetailPage() {
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Пользователи организации
+            Organization users
           </h3>
           <button
             onClick={() => {
@@ -173,7 +173,7 @@ export default function OrganizationDetailPage() {
             }}
             className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
           >
-            {showAddUser ? 'Отмена' : 'Добавить пользователя'}
+            {showAddUser ? 'Cancel' : 'Add user'}
           </button>
         </div>
 
@@ -191,7 +191,7 @@ export default function OrganizationDetailPage() {
 
         {!users || users.length === 0 ? (
           <p className="text-gray-600 dark:text-gray-400 text-center py-8">
-            Нет пользователей в этой организации
+            There are no users in this organization
           </p>
         ) : (
           <div className="space-y-4">

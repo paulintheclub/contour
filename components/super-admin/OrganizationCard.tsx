@@ -1,14 +1,8 @@
 import Link from 'next/link';
+import {Organization} from "@/types/organization";
 
 interface OrganizationCardProps {
-  organization: {
-    id: string;
-    name: string;
-    _count: {
-      users: number;
-      tours: number;
-    };
-  };
+  organization: Organization;
   onDelete: (id: string) => void;
   isDeleteConfirm: boolean;
 }

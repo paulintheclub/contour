@@ -31,17 +31,17 @@ export default function OrganizationsPage() {
       await deleteMutation.mutateAsync({ id });
       setDeleteConfirm(null);
     } catch (error) {
-      alert('Ошибка при удалении организации');
+      alert('Error when deleting an organization');
     }
   };
 
   return (
     <div>
       <PageHeader
-        title="Организации"
-        description="Управление всеми организациями платформы"
+        title="Organizations"
+        description="Management of all organizations on the platform"
         action={{
-          label: 'Создать организацию',
+          label: 'Create an organization',
           href: '/super-admin/organizations/create',
         }}
       />
@@ -50,13 +50,13 @@ export default function OrganizationsPage() {
         <LoadingSpinner />
       ) : organizations?.length === 0 ? (
         <EmptyState
-          title="Нет созданных организаций"
-          actionLabel="Создать первую организацию"
+          title="No organizations created"
+          actionLabel="Create your first organization"
           actionHref="/super-admin/organizations/create"
         />
       ) : (
         <div className="grid gap-6">
-          {organizations?.map((org: any) => (
+          {organizations?.map((org) => (
             <OrganizationCard
               key={org.id}
               organization={org}

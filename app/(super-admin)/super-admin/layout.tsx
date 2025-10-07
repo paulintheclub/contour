@@ -12,7 +12,7 @@ export default function SuperAdminLayout({
 
   const navigation: NavigationItem[] = [
     { 
-      name: 'Главная', 
+      name: 'Home',
       href: '/super-admin',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,7 +21,7 @@ export default function SuperAdminLayout({
       )
     },
     { 
-      name: 'Организации', 
+      name: 'Organizations',
       href: '/super-admin/organizations',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

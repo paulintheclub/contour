@@ -49,7 +49,7 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Имя *
+            Name *
           </label>
           <input
             type="text"
@@ -57,13 +57,13 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
             required
             disabled={isSubmitting}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white disabled:opacity-50"
-            placeholder="Иван Иванов"
+            placeholder="Bob Dylan"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Пароль *
+            Password *
           </label>
           <input
             type="password"
@@ -72,13 +72,13 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
             minLength={6}
             disabled={isSubmitting}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white disabled:opacity-50"
-            placeholder="Минимум 6 символов"
+            placeholder="Minimum 6 characters"
           />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Роль *
+            Role *
           </label>
           <select
             name="role"
@@ -86,9 +86,9 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
             disabled={isSubmitting}
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white disabled:opacity-50"
           >
-            <option value="ADMIN">Администратор</option>
-            <option value="MANAGER">Менеджер</option>
-            <option value="GUIDE">Гид</option>
+            <option value="ADMIN">Admin</option>
+            <option value="MANAGER">Manager</option>
+            <option value="GUIDE">Guide</option>
           </select>
         </div>
       </div>
@@ -99,7 +99,7 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
           disabled={isSubmitting}
           className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-medium rounded-lg transition-colors"
         >
-          {isSubmitting ? 'Добавление...' : 'Добавить'}
+          {isSubmitting ? 'Adding...' : 'Add'}
         </button>
         <button
           type="button"
@@ -107,7 +107,7 @@ export function AddUserForm({ onSubmit, onCancel, isSubmitting, error }: AddUser
           disabled={isSubmitting}
           className="px-6 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-lg transition-colors"
         >
-          Отмена
+          Cancel
         </button>
       </div>
     </form>

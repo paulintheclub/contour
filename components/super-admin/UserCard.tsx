@@ -47,9 +47,9 @@ export function UserCard({
       GUIDE: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200',
     };
     const labels = {
-      ADMIN: 'Администратор',
-      MANAGER: 'Менеджер',
-      GUIDE: 'Гид',
+      ADMIN: 'Admin',
+      MANAGER: 'Manager',
+      GUIDE: 'Guide',
     };
     return (
       <span className={`px-2 py-1 rounded-full text-xs font-medium ${styles[role as keyof typeof styles]}`}>
@@ -70,7 +70,7 @@ export function UserCard({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Имя
+                Name
               </label>
               <input
                 type="text"
@@ -94,7 +94,7 @@ export function UserCard({
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Роль
+                Role
               </label>
               <select
                 name="role"
@@ -102,9 +102,9 @@ export function UserCard({
                 disabled={isUpdating}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm disabled:opacity-50"
               >
-                <option value="ADMIN">Администратор</option>
-                <option value="MANAGER">Менеджер</option>
-                <option value="GUIDE">Гид</option>
+                <option value="ADMIN">Admin</option>
+                <option value="MANAGER">Manager</option>
+                <option value="GUIDE">Guide</option>
               </select>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function UserCard({
               disabled={isUpdating}
               className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white text-sm font-medium rounded-lg transition-colors"
             >
-              {isUpdating ? 'Сохранение...' : 'Сохранить'}
+              {isUpdating ? 'Saving...' : 'Save'}
             </button>
             <button
               type="button"
@@ -122,7 +122,7 @@ export function UserCard({
               disabled={isUpdating}
               className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-lg transition-colors"
             >
-              Отмена
+              Cancel
             </button>
           </div>
         </form>
@@ -147,19 +147,19 @@ export function UserCard({
             onClick={onEdit}
             className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
           >
-            Редактировать
+            Edit
           </button>
           <button
             onClick={onChangePassword}
             className="px-3 py-1 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
           >
-            Пароль
+            Password
           </button>
           <button
             onClick={onDelete}
             className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
           >
-            Удалить
+            Delete
           </button>
         </div>
       </div>

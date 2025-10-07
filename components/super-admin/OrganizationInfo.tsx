@@ -69,14 +69,14 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6 mb-6 sm:mb-8">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-          Информация об организации
+          Information about the organization
         </h2>
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
             className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
           >
-            Редактировать
+            Edit
           </button>
         )}
       </div>
@@ -90,7 +90,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
           )}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Название организации
+              Name of the organization
             </label>
             <input
               type="text"
@@ -103,7 +103,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
           </div>
           
           <ImageUploadField
-            label="Логотип организации"
+            label="Organization logo"
             value={logo}
             onChange={(value) => setLogo(value as string)}
             multiple={false}
@@ -113,7 +113,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
           {/* Email настройки */}
           <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Email интеграция
+              Email integration
             </h3>
 
             <div className="space-y-4">
@@ -127,7 +127,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
                   className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500"
                 />
                 <label htmlFor="emailEnabledEdit" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Включить email интеграцию
+                  Enable email integration
                 </label>
               </div>
 
@@ -135,7 +135,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
                 <div className="space-y-4 pl-6 border-l-2 border-indigo-500">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email адрес
+                      Email address
                     </label>
                     <input
                       type="email"
@@ -160,7 +160,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
                       placeholder="Оставьте пустым, чтобы не менять"
                     />
                     <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                      Для Gmail: <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">Создать App Password</a>
+                      For Gmail: <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">Create App Password</a>
                     </p>
                   </div>
 
@@ -202,7 +202,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
               disabled={isUpdating}
               className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-medium rounded-lg transition-colors"
             >
-              {isUpdating ? 'Сохранение...' : 'Сохранить'}
+              {isUpdating ? 'Saving...' : 'Save'}
             </button>
             <button
               type="button"
@@ -210,7 +210,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
               disabled={isUpdating}
               className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-lg transition-colors"
             >
-              Отмена
+              Cancel
             </button>
           </div>
         </form>
@@ -218,7 +218,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
         <div className="space-y-4">
           {organization.logo && (
             <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Логотип</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Logo</p>
               <div className="relative w-32 h-32 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                 <Image
                   src={organization.logo}
@@ -231,7 +231,7 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
             </div>
           )}
           <div>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Название</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Name</p>
             <p className="text-gray-900 dark:text-white font-medium text-lg">
               {organization.name}
             </p>
@@ -246,19 +246,19 @@ export function OrganizationInfo({ organization, onUpdate, isUpdating, error }: 
           {/* Email информация */}
           <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-              Email интеграция
+              Email integration
             </h3>
             <div className="space-y-3">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Статус</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Status</p>
                 <p className="text-gray-900 dark:text-white font-medium">
                   {organization.emailEnabled ? (
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                      ✓ Включена
+                      ✓ Enabled
                     </span>
                   ) : (
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
-                      Отключена
+                      Disabled
                     </span>
                   )}
                 </p>

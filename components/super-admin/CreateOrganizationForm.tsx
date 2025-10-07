@@ -30,7 +30,7 @@ export function CreateOrganizationForm() {
     setError('');
 
     if (!name.trim()) {
-      setError('Название обязательно');
+      setError('Title is required');
       return;
     }
 
@@ -49,10 +49,10 @@ export function CreateOrganizationForm() {
     <div className="max-w-2xl">
       <div className="mb-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Создать организацию
+          Create an organization
         </h2>
         <p className="text-gray-600 dark:text-gray-400">
-          Введите название новой организации
+          Enter the name of the new organization
         </p>
       </div>
 
@@ -69,7 +69,7 @@ export function CreateOrganizationForm() {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
-              Название организации *
+              Name of the organization *
             </label>
             <input
               id="name"
@@ -80,12 +80,12 @@ export function CreateOrganizationForm() {
               autoFocus
               disabled={createMutation.isPending}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white disabled:opacity-50"
-              placeholder="Например: Туристическое агентство"
+              placeholder="For example: Travel agency"
             />
           </div>
 
           <ImageUploadField
-            label="Логотип организации"
+            label="Organization logo"
             value={logo}
             onChange={(value) => setLogo(value as string)}
             multiple={false}
@@ -95,10 +95,10 @@ export function CreateOrganizationForm() {
           {/* Email настройки */}
           <div className="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Email интеграция (опционально)
+              Email integration (optional)
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Настройте IMAP подключение для автоматической обработки бронирований из email
+              Set up an IMAP connection for automatic processing of reservations from email
             </p>
 
             <div className="space-y-4">
@@ -112,7 +112,7 @@ export function CreateOrganizationForm() {
                   className="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
                 <label htmlFor="emailEnabled" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  Включить email интеграцию
+                  Enable email integration
                 </label>
               </div>
 
@@ -120,7 +120,7 @@ export function CreateOrganizationForm() {
                 <div className="space-y-4 pl-6 border-l-2 border-indigo-500">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email адрес
+                      Email address
                     </label>
                     <input
                       type="email"
@@ -142,10 +142,10 @@ export function CreateOrganizationForm() {
                       onChange={(e) => setEmailPassword(e.target.value)}
                       disabled={createMutation.isPending}
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                      placeholder="16-значный App Password"
+                      placeholder="16-digit App Password"
                     />
                     <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                      Для Gmail: <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">Создать App Password</a>
+                      For Gmail: <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener noreferrer" className="text-indigo-600 dark:text-indigo-400 hover:underline">Create App Password</a>
                     </p>
                   </div>
 
@@ -187,7 +187,7 @@ export function CreateOrganizationForm() {
               disabled={createMutation.isPending}
               className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold rounded-lg transition-colors"
             >
-              {createMutation.isPending ? 'Создание...' : 'Создать организацию'}
+              {createMutation.isPending ? 'Creation...' : 'Create an organization'}
             </button>
             <button
               type="button"
@@ -195,7 +195,7 @@ export function CreateOrganizationForm() {
               disabled={createMutation.isPending}
               className="sm:w-auto px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-lg transition-colors disabled:opacity-50"
             >
-              Отмена
+              Cancel
             </button>
           </div>
         </div>
