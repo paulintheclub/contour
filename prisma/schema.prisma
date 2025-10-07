@@ -1,0 +1,205 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// Модели приложения
+// ============================================
+
+model User {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  name     String?
+  password String // Хешированный пароль
+  image    String?
+
+  // Флаг суперадминистратора платформы
+  isSuperAdmin Boolean @default(false)
+
+  // Связь с организацией (для пользователей организации)
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           UserRole?
+
+  // Связи со слотами туров
+  availableForSlots TourSlot[] @relation("AvailableGuides")
+  assignedToSlots   TourSlot[] @relation("AssignedGuides")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([organizationId])
+}
+
+enum UserRole {
+  ADMIN // Администратор организации
+  MANAGER // Менеджер/Модератор
+  GUIDE // Гид
+}
+
+model Organization {
+  id   String  @id @default(cuid())
+  name String
+  logo String? // URL логотипа организации
+
+  // Email настройки для получения бронирований
+  emailUser     String? // Email адрес
+  emailPassword String? // Зашифрованный пароль
+  emailHost     String? @default("imap.gmail.com") // IMAP хост
+  emailPort     Int?    @default(993) // IMAP порт
+  emailEnabled  Boolean @default(false) // Включена ли email интеграция
+
+  // Связи
+  users User[]
+  tours Tour[]
+
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  Booking            Booking[]
+  EmailProcessingLog EmailProcessingLog[]
+}
+
+model Tour {
+  id        String   @id @default(cuid())
+  name      String
+  tourTag   String // Тег тура
+  capacity  Int // Вместимость
+  listNames String[] // Массив имен списков
+
+  // Связь с организацией
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  // Связь со слотами
+  slots TourSlot[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([tourTag])
+}
+
+model TourSlot {
+  id        String  @id @default(cuid())
+  date      String // Дата в формате строки (YYYY-MM-DD)
+  time      String // Время в формате строки (HH:MM)
+  language  String // Язык тура
+  isPrivate Boolean @default(false) // Приватный тур
+  adults    Int     @default(0) // Количество взрослых
+  childs    Int     @default(0) // Количество детей
+
+  // Связь с туром
+  tourId String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  // Доступные гиды (многие ко многим)
+  availableGuides User[] @relation("AvailableGuides")
+
+  // Назначенные гиды (многие ко многим)
+  assignedGuides User[] @relation("AssignedGuides")
+
+  // Связь с бронированиями
+  bookings Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tourId])
+  @@index([date])
+}
+
+model Booking {
+  id String @id @default(cuid())
+
+  // Связь с организацией и туром
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  tourSlotId String?
+  tourSlot   TourSlot? @relation(fields: [tourSlotId], references: [id], onDelete: SetNull)
+
+  // Информация о клиенте
+  customerName  String
+  customerEmail String
+  customerPhone String?
+
+  // Детали бронирования
+  adults   Int     @default(0)
+  children Int     @default(0)
+  date     String // YYYY-MM-DD
+  time     String? // HH:MM
+  language String?
+
+  // Источник бронирования
+  source     BookingSource
+  externalId String? // ID в платформе источника
+
+  // Email данные
+  emailMessageId String? @unique // Message-ID из письма
+  rawEmailData   String? @db.Text // JSON с полными данными письма
+
+  // Метаданные
+  notes String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([tourSlotId])
+  @@index([customerEmail])
+  @@index([date])
+  @@index([emailMessageId])
+}
+
+enum BookingSource {
+  BOOKING_COM
+  AIRBNB
+  GETYOURGUIDE
+  VIATOR
+  TRIPADVISOR
+  EMAIL
+  MANUAL
+}
+
+model EmailProcessingLog {
+  id String @id @default(cuid())
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  emailMessageId String   @unique
+  from           String
+  subject        String
+  receivedAt     DateTime
+
+  source     BookingSource?
+  actionType EmailActionType?
+
+  bookingId    String?
+  errorMessage String? @db.Text
+
+  processingTime Int? // milliseconds
+
+  createdAt DateTime @default(now())
+
+  @@index([organizationId])
+}
+
+enum EmailActionType {
+  CREATE_BOOKING
+  UPDATE_BOOKING
+  CANCEL_BOOKING
+  REMINDER
+  UNKNOWN
+}
